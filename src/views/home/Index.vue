@@ -2,6 +2,8 @@
   <home-header/>
   <home-banner :list="swiperList"/>
   <home-icons :list="iconList"></home-icons>
+  <home-recommend :list="recommendList"></home-recommend>
+  <home-weekend :list="weekendList"></home-weekend>
 </template>
 
 <script>
@@ -9,13 +11,16 @@ import {onMounted, reactive, toRefs} from 'vue'
 import HomeHeader from './components/Header'
 import HomeBanner from './components/Banner'
 import HomeIcons from './components/Icons'
-
+import HomeRecommend from './components/Recommend'
+import HomeWeekend from './components/Weekend'
 import request from '@/api/request.js'
 export default {
   setup(){
     const state = reactive({
       swiperList: [],
-      iconList: []
+      iconList: [],
+      recommendList: [],
+      weekendList: []
     })
     // methods 
     const getHomeInfo = async() => {
@@ -24,6 +29,8 @@ export default {
       })
       state.swiperList = res.swiperList
       state.iconList = res.iconList
+      state.recommendList = res.recommendList
+      state.weekendList = res.weekendList
     }
     // mounted
     onMounted(()=>{
@@ -34,7 +41,9 @@ export default {
   components:{
     HomeHeader,
     HomeBanner,
-    HomeIcons
+    HomeIcons,
+    HomeRecommend,
+    HomeWeekend
   },
 }
 </script>
