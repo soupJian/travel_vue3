@@ -5,7 +5,8 @@
             delay: 2000,
             stopOnLastSlide: false,
             disableOnInteraction: false}"
-          :loop="true">
+          :loop="true"
+          v-if="showSwiper">
     <swiper-slide v-for="item of list" :key="item.id" class="banner-item">
         <img :src="item.imgUrl"/>
     </swiper-slide>
@@ -17,6 +18,7 @@ import SwiperCore, { Pagination,Autoplay } from 'swiper';
   // 导入swiper样式
   import 'swiper/swiper.scss';
   import 'swiper/components/pagination/pagination.scss';
+import { computed } from 'vue';
   SwiperCore.use([Pagination,Autoplay]);
   export default {
     props:{
@@ -25,7 +27,13 @@ import SwiperCore, { Pagination,Autoplay } from 'swiper';
         required: true
       }
     },
-    setup(){
+    setup(props){
+      const showSwiper = computed(()=>{
+        return props.list.length
+      })
+      return { // setup
+        showSwiper
+      }
     },
     components: {
       Swiper,
