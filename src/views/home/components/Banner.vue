@@ -14,10 +14,10 @@
 </template>
 <script>
 import SwiperCore, { Pagination,Autoplay } from 'swiper';
-  import { Swiper, SwiperSlide } from 'swiper/vue';
-  // 导入swiper样式
-  import 'swiper/swiper.scss';
-  import 'swiper/components/pagination/pagination.scss';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+// 导入swiper样式
+import 'swiper/swiper.scss';
+import 'swiper/components/pagination/pagination.scss';
 import { computed } from 'vue';
   SwiperCore.use([Pagination,Autoplay]);
   export default {
@@ -41,7 +41,7 @@ import { computed } from 'vue';
     },
   };
 </script>
-<style lang="scss" >
+<style lang="scss">
 // 修改分页器样式
 .swiper-pagination-bullet-active{
     width: 16px;

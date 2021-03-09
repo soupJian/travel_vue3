@@ -10,12 +10,25 @@ const routes = [
     path: '/city',
     name: 'City',
     component: () => import('../views/city/Index.vue')
+  },
+  {
+    path: '/detail/:id',
+    name: 'Detail',
+    component: () => import('../views/detail/Index.vue')
   }
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    // 防止页面滚动影响其他页面
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0,left: 0 }
+    }
+  }
 })
 
 export default router

@@ -29,12 +29,12 @@
 ### 对比修改分页器样式
 
 ```
-// 2.x stylus 写法 scoped
+// 2.x stylus
 .wrapper >>> .swiper-pagination-bullet-active
     width: 16px
     border-radius 8px
     background: #fff
-// 3.x scss写法 scoped 和 >>> 深度选择器 不可以
+// 3.x scss 和 >>> 深度选择器 不可以
   .swiper-pagination-bullet-active{
     width: 16px;
     border-radius: 8px;
@@ -132,3 +132,39 @@ setup(props,{emit}){
   ...
 }
 ```
+
+### scrollBehavior // 滚动行为
+
+```
+2.x
+const router = new VueRouter({
+  routes,
+  /* 滚动时不影响其他界面 */
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
+})
+3.x
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    // 防止页面滚动影响其他页面
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0,left: 0 }
+    }
+  }
+})
+```
+
+可以看出有 2.x 的 x,y 变为了 left 和 top
+
+### router-link
+
+删除 tag 和 event 属性，还是以 a 标签渲染
