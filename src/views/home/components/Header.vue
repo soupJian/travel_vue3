@@ -9,8 +9,7 @@
     </div>
     <router-link to='/city'>
       <div class="header-right">
-        <!-- {{this.city}} -->
-        杭州
+        {{city}}
         <span class="iconfont arrow-icon">&#xe64a;</span>
       </div>
     </router-link>
@@ -18,12 +17,18 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex'
+import { computed } from 'vue'
+import {useStore} from 'vuex'
 export default {
   name: 'HomeHeader',
-  // computed: {
-  //     ...mapState(['city'])
-  // }
+  setup(){
+    // 使用vuex
+    const store = useStore()
+    const city = computed(()=>store.state.city)
+    return {
+      city
+    }
+  }
 }
 </script>
 

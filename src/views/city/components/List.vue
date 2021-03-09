@@ -5,7 +5,7 @@
         <div class="title border-topbottom">当前城市</div>
         <div class="button-list">
           <div class="button-wrapper">
-            <div class="button">江西</div>
+            <div class="button">{{city}}</div>
           </div>
         </div>
       </div>
@@ -47,8 +47,9 @@
 
 <script>
 import Bscroll from 'better-scroll'
-import { onMounted, reactive, toRefs,ref,watch } from 'vue';
-// import { mapState, mapMutations } from 'vuex'
+import { onMounted, reactive, toRefs,ref,watch,computed } from 'vue';
+import {useStore} from 'vuex'
+import {useRouter} from 'vue-router'
 export default {
   name: 'CityList',
   props: {
@@ -57,14 +58,17 @@ export default {
     letter: String
   },
   setup(props){
+    // 使用vuex
+    const store = useStore()
+    const city = computed(()=>store.state.city)
     const state = reactive({
       scroll: null,
     })
+    const router = useRouter()
     const wrapper = ref(null)
     const handleCityClick = (city) => {
-      console.log(city);
-      // this.changeCity(city)
-      // this.$router.push('/')
+      store.commit('changeCity',city)
+      router.push('/')
     }
     watch(()=>props.letter,()=>{
       if (props.letter) {
@@ -78,7 +82,8 @@ export default {
     return {
       ...toRefs(state),
       handleCityClick,
-      wrapper
+      wrapper,
+      city
     }
   }
 }

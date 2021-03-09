@@ -168,3 +168,30 @@ const router = createRouter({
 ### router-link
 
 删除 tag 和 event 属性，还是以 a 标签渲染
+
+### route 和 router
+
+```
+import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
+
+...
+const route = useRoute()
+const router = useRouter()
+....
+const id = route.params.id
+router.push()
+```
+
+## vuex
+
+```
+import {useStore} from 'vuex'
+setup(){
+  const store = useStore()
+  const city = computed(()=>store.state.city)
+
+  ...
+  store.commit('changeCity',city)
+}
+```
