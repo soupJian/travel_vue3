@@ -26,7 +26,8 @@
 <script>
 import BScroll from 'better-scroll'
 import { reactive,ref,watch,toRefs, onMounted } from 'vue'
-// import { mapMutations } from 'vuex'
+import {useStore} from 'vuex'
+import {useRouter} from 'vue-router'
 export default {
   name: 'CitySearch',
   props: {
@@ -35,6 +36,8 @@ export default {
     }
   },
   setup(props){
+    const store = useStore()
+    const router = useRouter()
     let timer = null
     const keyword = ref('')
     const state = reactive({
@@ -66,7 +69,9 @@ export default {
       state.scroll = new BScroll(wrapper.value, {click: true})
     })
     const handleCityClick =  (city) => {
-      console.log(city);
+      store.commit('changeCity',city)
+      router.push('/')
+      keyword.value = ''
     }
     return{
       keyword,
