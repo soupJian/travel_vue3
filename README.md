@@ -44,7 +44,10 @@
 
 ## 钩子函数
 
-1. compouted
+2.x 直接使用
+3.x 用之前先导入
+
+### compouted
 
 ```
 2.x
@@ -54,9 +57,78 @@ computed: {
   }
 }
 3.x
-// 导入computed
-import { computed } from 'vue';
 const showSwiper = computed(()=>{
   return props.list.length
 })
+```
+
+### watch
+
+```
+2.x
+watch: {
+  letter () {
+    if (this.letter) {
+      const element = this.$refs[this.letter][0]
+      this.scroll.scrollToElement(element)
+    }
+  }
+}
+3.x
+watch只能观察ref数据，reactive内部数据得先return才可
+watch还可以同时监听多个数据
+watch(()=>props.letter,()=>{
+  if (props.letter) {
+    const element = document.getElementById(props.letter)
+    state.scroll.scrollToElement(element)
+  }
+})
+watch(
+  [() => state.count, () => state.name], // Object.values(toRefs(state)),
+  ([count, name], [prevCount, prevName]) => {
+    ...
+  })
+```
+
+### methods
+
+2.x 所有的方法写在这个里面
+3.x **不需要导入 methods**，方法直接定义
+
+## 访问虚拟 dom
+
+2.x
+
+```
+this.scroll = new Bscroll(this.$refs.wrapper, {click: true})
+```
+
+3.x
+
+```
+// 虚拟dom和react useRef 用法一致
+setup(){
+  const wrapper = ref(null)
+  state.scroll = new Bscroll(wrapper.value, {click: true})
+  return{
+  wrapper
+    ...torefs(state)
+  }
+}
+在vue3.0中 better-scroll如果引入正确且刷新页面不滚动，试试改变窗口大小试试
+```
+
+### 父子组件传值
+
+3.x 和 2.x 基本上一致
+由于 3.x 访问不到 this，无法执行 this.\$emit
+通过 setup 的第二个参数接受 emit 事件
+
+```
+setup(props,{emit}){
+  function handleLetterClick (e) {
+    emit('change', e.target.innerText)
+  }
+  ...
+}
 ```
