@@ -17,7 +17,9 @@
 </template>
 
 <script>
+// 按需导入vue hook
 import { computed } from 'vue'
+// 导入 vuex
 import {useStore} from 'vuex'
 export default {
   name: 'HomeHeader',

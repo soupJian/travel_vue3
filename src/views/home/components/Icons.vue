@@ -12,36 +12,40 @@
 </template>
 
 <script>
+// 导入swiper
 import { Swiper, SwiperSlide } from 'swiper/vue';
+// 按需导入vue hook
 import { computed } from 'vue';
 export default {
-    name: 'HomeIcons',
-    components: {
-        Swiper,
-        SwiperSlide
-    },
-    props: {
-        list: {
-          type:Array,
-          required: true
-        },
-    },
-    setup(props){
-      const pages = computed(()=>{
-        const pages = [];
-        props.list.forEach((item, index) => {
-            const page = Math.floor(index / 8);
-            if (!pages[page]) {
-                pages[page] = [];
-            }
-            pages[page].push(item);
-        });
-        return pages
-      })
-      return {
-        pages
-      }
+  name: 'HomeIcons',
+  props: {
+      list: {
+        type:Array,
+        required: true
+      },
+  },
+  setup(props){
+    // computed
+    const pages = computed(()=>{
+      const pages = [];
+      props.list.forEach((item, index) => {
+          const page = Math.floor(index / 8);
+          if (!pages[page]) {
+              pages[page] = [];
+          }
+          pages[page].push(item);
+      });
+      return pages
+    })
+    // setup返回值
+    return {
+      pages
     }
+  },
+  components: {
+      Swiper,
+      SwiperSlide
+  },
 }
 </script>
 

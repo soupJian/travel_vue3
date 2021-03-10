@@ -46,9 +46,13 @@
 </template>
 
 <script>
+// 导入better-scroll
 import Bscroll from 'better-scroll'
+// 导入vue hook
 import { onMounted, reactive, toRefs,ref,watch,computed } from 'vue';
+// 导入vuex
 import {useStore} from 'vuex'
+// 导入vue-router
 import {useRouter} from 'vue-router'
 export default {
   name: 'CityList',
@@ -64,19 +68,25 @@ export default {
     const state = reactive({
       scroll: null,
     })
+    // 使用路由对象
     const router = useRouter()
+    // 绑定dom ref
     const wrapper = ref(null)
+    // methods
     const handleCityClick = (city) => {
       store.commit('changeCity',city)
       router.push('/')
     }
+    // watch
     watch(()=>props.letter,()=>{
       if (props.letter) {
         const element = document.getElementById(props.letter)
         state.scroll.scrollToElement(element)
       }
     })
+    // mounted
     onMounted(()=>{
+      // 初始化better-scroll
       state.scroll = new Bscroll(wrapper.value, {click: true})
     })
     return {

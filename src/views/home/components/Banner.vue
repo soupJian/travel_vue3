@@ -13,31 +13,34 @@
   </swiper>
 </template>
 <script>
+// 导入swiper插件
 import SwiperCore, { Pagination,Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-
+// 按需导入vue hook
 import { computed } from 'vue';
-  SwiperCore.use([Pagination,Autoplay]);
-  export default {
-    props:{
-      list:{
-        type:Array,
-        required: true
-      }
-    },
-    setup(props){
-      const showSwiper = computed(()=>{
-        return props.list.length
-      })
-      return { // setup
-        showSwiper
-      }
-    },
-    components: {
-      Swiper,
-      SwiperSlide,
-    },
-  };
+// 使用swiper插件
+SwiperCore.use([Pagination,Autoplay]);
+export default {
+  props:{
+    list:{
+      type:Array,
+      required: true
+    }
+  },
+  setup(props){
+    // methods
+    const showSwiper = computed(()=>{
+      return props.list.length
+    })
+    return { // setup
+      showSwiper
+    }
+  },
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+};
 </script>
 <style lang="scss">
 // 修改分页器样式

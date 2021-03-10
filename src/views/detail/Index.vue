@@ -13,19 +13,18 @@
 </template>
 
 <script>
+// 导入组件
 import DetailBanner from './components/Banner.vue'
 import DetailHeader from './components/Header.vue'
 import DetailList from './components/List.vue'
+// 导入 请求
 import request from '@/api/request.js'
+// 导入vue-route
 import { useRoute } from 'vue-router'
+// 导入 vue hook
 import { onActivated, reactive,toRefs } from 'vue'
 export default {
   name: 'Detail',
-  components: {
-    DetailBanner,
-    DetailHeader,
-    DetailList
-  },
   setup(){
     const state = reactive({
       sightName: '',
@@ -33,7 +32,9 @@ export default {
       gallaryImgs: [],
       list: []
     })
+    // 使用vue-route
     const route = useRoute()
+    // methods
     const getDetailInfo =  async () => {
       const{ data: { data: res } } = await request({
         url: '/detail.json',
@@ -46,13 +47,19 @@ export default {
       state.gallaryImgs = res.gallaryImgs
       state.list = res.categoryList
     }
+    // actived
     onActivated(()=>{
       getDetailInfo()
     })
     return {
       ...toRefs(state),
     }
-  }
+  },
+  components: {
+    DetailBanner,
+    DetailHeader,
+    DetailList
+  },
 }
 </script>
 

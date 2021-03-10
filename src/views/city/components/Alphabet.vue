@@ -36,6 +36,7 @@ export default {
       }
       return letters
     })
+    // methods
     function handleLetterClick (e) {
       emit('change', e.target.innerText)
     }

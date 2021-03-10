@@ -24,9 +24,13 @@
 </template>
 
 <script>
+// 导入better-scroll
 import BScroll from 'better-scroll'
-import { reactive,ref,watch,toRefs, onMounted } from 'vue'
+// 导入vue hook
+import { reactive,ref,watch,toRefs, onMounted, onActivated } from 'vue'
+// 导入vuex
 import {useStore} from 'vuex'
+// 导入路由对象
 import {useRouter} from 'vue-router'
 export default {
   name: 'CitySearch',
@@ -36,7 +40,9 @@ export default {
     }
   },
   setup(props){
+    // 使用vuex
     const store = useStore()
+    // 使用路由对象
     const router = useRouter()
     let timer = null
     const keyword = ref('')
@@ -45,6 +51,7 @@ export default {
       scroll: null
     })
     const wrapper = ref(null)
+    // watch
     watch(keyword,()=>{
       if (timer) {
         clearTimeout(timer)
@@ -65,14 +72,20 @@ export default {
         state.list = result
       }, 100)
     })
+    // mounted
     onMounted(()=>{
       state.scroll = new BScroll(wrapper.value, {click: true})
     })
+    // methods
     const handleCityClick =  (city) => {
       store.commit('changeCity',city)
       router.push('/')
       keyword.value = ''
     }
+    // activated
+    onActivated(()=>{
+      keyword.value = ''
+    })
     return{
       keyword,
       ...toRefs(state),

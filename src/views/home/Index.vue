@@ -7,12 +7,15 @@
 </template>
 
 <script>
+// 按需导入vue hook
 import {onMounted, reactive, toRefs} from 'vue'
+// 导入组件
 import HomeHeader from './components/Header'
 import HomeBanner from './components/Banner'
 import HomeIcons from './components/Icons'
 import HomeRecommend from './components/Recommend'
 import HomeWeekend from './components/Weekend'
+// 导入请求api
 import request from '@/api/request.js'
 export default {
   setup(){

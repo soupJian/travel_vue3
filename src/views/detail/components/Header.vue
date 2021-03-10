@@ -31,6 +31,7 @@ export default {
         opacity: 0
       }
     })
+    // methods
     const handleScroll = () => {
       const top = document.documentElement.scrollTop
       if (top > 50) {
@@ -42,9 +43,11 @@ export default {
         state.showAbs = true
       }
     }
+    // activated
     onActivated(()=>{
       window.addEventListener('scroll', handleScroll)
     })
+    // deactivated
     onDeactivated(()=>{
       window.removeEventListener('scroll', handleScroll)
     })

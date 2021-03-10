@@ -15,26 +15,24 @@
 </template>
 
 <script>
- import CityHeader from './components/Header.vue'
- import CitySearch from './components/Search.vue'
- import CityList from './components/List.vue'
- import CityAlphabet from './components/Alphabet.vue'
- import request from '@/api/request.js'
- import { onMounted,reactive, toRefs } from 'vue'
+// 导入组件
+import CityHeader from './components/Header.vue'
+import CitySearch from './components/Search.vue'
+import CityList from './components/List.vue'
+import CityAlphabet from './components/Alphabet.vue'
+// 导入 请求
+import request from '@/api/request.js'
+// 导入vue hook
+import { onMounted,reactive, toRefs } from 'vue'
 export default {
   name: 'City',
-  components: {
-    CityHeader,
-    CitySearch,
-    CityList,
-    CityAlphabet
-  },
   setup(){
     const state = reactive({
       cities: {},
       hotCities: [],
       letter: ''
     })
+    // methods
     const getCityInfo =  async() => {
       const {data: { data: res } }= await request({
         url:'/city.json'
@@ -45,6 +43,7 @@ export default {
     const handleLetterChange =  (innerText) => {
       state.letter = innerText
     }
+    // mounted
     onMounted(()=>{
       getCityInfo()
     })
@@ -52,6 +51,12 @@ export default {
       ...toRefs(state),
       handleLetterChange
     }
-  }
+  },
+  components: {
+    CityHeader,
+    CitySearch,
+    CityList,
+    CityAlphabet
+  },
 }
 </script>

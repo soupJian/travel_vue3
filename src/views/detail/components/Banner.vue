@@ -36,6 +36,7 @@ export default {
     const state = reactive({
       showGallary: false
     })
+    // methods
     const handleBannerClick = () => {
       state.showGallary = true
     }

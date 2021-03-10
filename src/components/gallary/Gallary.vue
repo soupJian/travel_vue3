@@ -17,9 +17,10 @@
 </template>
 
 <script>
+// 导入swiper
 import SwiperCore, { Pagination } from 'swiper';
-  import { Swiper, SwiperSlide } from 'swiper/vue';
-  SwiperCore.use([Pagination]);
+import { Swiper, SwiperSlide } from 'swiper/vue';
+SwiperCore.use([Pagination]);
 export default {
   name: 'CommonGallary',
   props: {
@@ -31,6 +32,7 @@ export default {
     }
   },
   setup(props,{emit}){
+    // methods
     function handleGallaryClick(){
       emit('close')
     }
