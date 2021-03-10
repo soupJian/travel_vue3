@@ -109,14 +109,15 @@ this.scroll = new Bscroll(this.$refs.wrapper, {click: true})
 // 虚拟dom和react useRef 用法一致
 setup(){
   const wrapper = ref(null)
-  state.scroll = new Bscroll(wrapper.value, {click: true})
+  state.scroll = new Bscroll(wrapper.value, {click: true,observeDOM: true})
   return{
   wrapper
     ...torefs(state)
   }
 }
-在vue3.0中 better-scroll如果引入正确且刷新页面不滚动，试试改变窗口大小试试
 ```
+
+**observeDOM: true**这个参数一定要加进去，否则页面不滚动
 
 ### 父子组件传值
 

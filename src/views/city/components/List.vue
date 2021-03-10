@@ -48,8 +48,10 @@
 <script>
 // 导入better-scroll
 import Bscroll from 'better-scroll'
+// import ObserveDom from '@better-scroll/observe-dom'
+// Bscroll.use(ObserveDom)
 // 导入vue hook
-import { onMounted, reactive, toRefs,ref,watch,computed } from 'vue';
+import {onMounted, reactive, toRefs,ref,watch,computed } from 'vue';
 // 导入vuex
 import {useStore} from 'vuex'
 // 导入vue-router
@@ -84,10 +86,12 @@ export default {
         state.scroll.scrollToElement(element)
       }
     })
+    watch(()=>props.cities,()=> {
+      state.scroll && state.scroll.refresh()
+    })
     // mounted
     onMounted(()=>{
-      // 初始化better-scroll
-      state.scroll = new Bscroll(wrapper.value, {click: true})
+        state.scroll = new Bscroll(wrapper.value, {click: true,observeDOM: true})
     })
     return {
       ...toRefs(state),
@@ -95,7 +99,13 @@ export default {
       wrapper,
       city
     }
-  }
+  },
+  // mounted(){
+  //   this.scroll = new Bscroll(this.$refs.wrapper, {click: true})
+  //   const element = this.$refs.A
+  //   console.log(element);
+  //   // this.scroll.scrollToElement()
+  // }
 }
 </script>
 

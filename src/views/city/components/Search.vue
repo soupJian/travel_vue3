@@ -74,7 +74,7 @@ export default {
     })
     // mounted
     onMounted(()=>{
-      state.scroll = new BScroll(wrapper.value, {click: true})
+      state.scroll = new BScroll(wrapper.value, {click: true,observeDOM: true})
     })
     // methods
     const handleCityClick =  (city) => {

@@ -52,7 +52,6 @@ export default {
           const touchY = e.touches[0].clientY - 79
           const index = Math.floor((touchY - state.startY) / 20)
           if (index >= 0 && index < letters.value.length) {
-            console.log(letters.value[index]);
             emit('change', letters.value[index])
           }
         }, 16)
