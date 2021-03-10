@@ -19,9 +19,6 @@
 <script>
 import SwiperCore, { Pagination } from 'swiper';
   import { Swiper, SwiperSlide } from 'swiper/vue';
-  // 导入swiper样式
-  import 'swiper/swiper.scss';
-  import 'swiper/components/pagination/pagination.scss';
   SwiperCore.use([Pagination]);
 export default {
   name: 'CommonGallary',
@@ -53,6 +50,9 @@ export default {
 </script>
 
 <style lang="scss">
+  // 导入swiper样式
+  @import 'swiper/swiper.scss';
+  @import 'swiper/components/pagination/pagination.scss';
   .container{
     display: flex;
     flex-direction: column;

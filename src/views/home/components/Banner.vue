@@ -15,9 +15,7 @@
 <script>
 import SwiperCore, { Pagination,Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-// 导入swiper样式
-import 'swiper/swiper.scss';
-import 'swiper/components/pagination/pagination.scss';
+
 import { computed } from 'vue';
   SwiperCore.use([Pagination,Autoplay]);
   export default {
