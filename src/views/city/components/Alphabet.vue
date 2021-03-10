@@ -4,7 +4,7 @@
       class="item"
       v-for="item of letters"
       :key="item"
-      :ref="item"
+      :id="`${item}-alphabet`"
       @click="handleLetterClick"
       @touchstart="handleTouchStart"
       @touchmove="handleTouchMove"
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { reactive,computed, toRefs } from 'vue'
+import { reactive,computed, toRefs, onUpdated } from 'vue'
 export default {
   name: 'CityAlphabet',
   props: {
@@ -51,8 +51,9 @@ export default {
         state.timer = setTimeout(() => {
           const touchY = e.touches[0].clientY - 79
           const index = Math.floor((touchY - state.startY) / 20)
-          if (index >= 0 && index < props.letters.length) {
-            emit('change', props.letters[index])
+          if (index >= 0 && index < letters.value.length) {
+            console.log(letters.value[index]);
+            emit('change', letters.value[index])
           }
         }, 16)
       }
@@ -60,6 +61,10 @@ export default {
     function handleTouchEnd () {
       state.touchStatus = false
     }
+    onUpdated(()=>{
+      const element = document.getElementById('A-alphabet')
+      state.startY = element.offsetTop
+    })
     return {
       ...toRefs(state),
       letters,
