@@ -43,6 +43,9 @@ export default {
 };
 </script>
 <style lang="scss">
+// 导入swiper样式
+@import 'swiper/swiper.scss';
+@import 'swiper/components/pagination/pagination.scss';
 // 修改分页器样式
 .swiper-pagination-bullet-active{
     width: 16px;

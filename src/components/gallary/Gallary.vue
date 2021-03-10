@@ -52,9 +52,6 @@ export default {
 </script>
 
 <style lang="scss">
-  // 导入swiper样式
-  @import 'swiper/swiper.scss';
-  @import 'swiper/components/pagination/pagination.scss';
   .container{
     display: flex;
     flex-direction: column;
